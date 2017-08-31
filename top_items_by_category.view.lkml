@@ -1,10 +1,11 @@
 view: top_items_by_category {
   derived_table: {
-    sql: SELECT category, brand, MIN(rank) AS "Overall Rank", item_name, retail_price
+    sql: SELECT id, category, brand, MIN(rank) AS "Overall Rank", item_name, retail_price
         FROM products
         GROUP BY category;
        ;;
-    persist_for: "4 Hours"
+    persist_for: "240 minutes"
+    indexes: ["products.id"]
   }
 
   measure: count {

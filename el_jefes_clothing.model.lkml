@@ -14,6 +14,8 @@ explore: events {
   }
 }
 
+explore:  top_items_by_category{}
+
 explore: inventory_items {
   join: products {
     type: left_outer
