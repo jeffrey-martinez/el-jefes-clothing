@@ -5,7 +5,7 @@ view: top_items_by_category {
         GROUP BY category;
        ;;
     persist_for: "240 minutes"
-    indexes: ["products.id"]
+    indexes: ["id"]
   }
 
   measure: count {
