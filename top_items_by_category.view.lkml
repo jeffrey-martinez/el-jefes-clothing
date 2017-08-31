@@ -4,7 +4,7 @@ view: top_items_by_category {
         FROM products
         GROUP BY category;
        ;;
-    persist_for: "240 minutes"
+    persist_for: "4 hours"
     indexes: ["id"]
   }
 
