@@ -76,6 +76,12 @@ explore: user_data {
     view_label: "Users info"
     fields: [users.id, users.city, users.age]
   }
+  always_filter: {
+    filters: {
+      field:  users.country
+      value: "USA"
+    }
+  }
 }
 
 explore: users {}
