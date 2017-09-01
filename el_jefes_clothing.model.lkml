@@ -14,8 +14,6 @@ explore: events {
   }
 }
 
-explore:  top_items_by_category {}
-
 explore: inventory_items {
   join: products {
     type: left_outer
@@ -58,7 +56,15 @@ explore: orders {
   }
 }
 
-explore: products {}
+explore: products {
+  label: "Products sold after August 31, 2015"
+  join: inventory_items {
+    relationship: one_to_one
+    type: inner
+    sql_on: ${products.id} = ${inventory_items.product_id} ;;
+  }
+  sql_always_where: ${inventory_items.sold_date} > '2015-08-31';;
+}
 
 explore: schema_migrations {}
 
@@ -67,6 +73,8 @@ explore: user_data {
     type: left_outer
     sql_on: ${user_data.user_id} = ${users.id} ;;
     relationship: many_to_one
+    view_label: "Users info"
+    fields: [users.id, users.city, users.age]
   }
 }
 
