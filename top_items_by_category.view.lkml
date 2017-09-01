@@ -8,6 +8,11 @@ view: top_items_by_category {
     indexes: ["id"]
   }
 
+  dimension: id {
+    type: number
+    primary_key: yes
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
@@ -24,7 +29,7 @@ view: top_items_by_category {
   }
 
   dimension: overall_rank {
-    type: string
+    type: number
     label: "Overall Rank"
     sql: ${TABLE}.`Overall Rank` ;;
   }
@@ -35,8 +40,13 @@ view: top_items_by_category {
   }
 
   dimension: retail_price {
-    type: string
+    type: number
     sql: ${TABLE}.retail_price ;;
+  }
+
+  measure: sum {
+    type: number
+    drill_fields: [overall_rank, retail_price]
   }
 
   set: detail {
