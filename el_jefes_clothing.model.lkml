@@ -74,7 +74,7 @@ explore: user_data {
     sql_on: ${user_data.user_id} = ${users.id} ;;
     relationship: many_to_one
     view_label: "Users info"
-    fields: [users.id, users.city, users.age]
+    fields: [users.id, users.city, users.age, users.country]
   }
   always_filter: {
     filters: {
