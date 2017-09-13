@@ -56,6 +56,14 @@ explore: orders {
   }
 }
 
+explore: user_facts {
+  join: orders {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${user_facts.user_id} = ${orders.user_id} ;;
+  }
+}
+
 explore: products {}
 
 explore: schema_migrations {}

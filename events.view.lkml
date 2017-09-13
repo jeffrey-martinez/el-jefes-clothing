@@ -41,4 +41,9 @@ view: events {
     type: count
     drill_fields: [id, users.last_name, users.first_name, users.id]
   }
+
+  measure: max {
+    type:  max
+    drill_fields: [id, users.last_name, users.first_name, users.id]
+  }
 }

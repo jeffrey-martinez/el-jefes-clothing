@@ -36,4 +36,24 @@ view: orders {
     type: count
     drill_fields: [id, users.last_name, users.first_name, users.id, order_items.count]
   }
+
+  measure: first_order {
+    type: date
+    sql: MIN(${created_date}) ;;
+  }
+
+  measure: recent_order {
+    type:  date
+    sql: MAX(${created_date}) ;;
+  }
+
+  measure: days_since_first_purchase {
+    type:  number
+    sql: TIMESTAMPDIFF(day, ${first_order}, CURDATE()) ;;
+  }
+  measure: months_since_first_purchase {
+    type:  number
+    hidden: yes
+    sql: TIMESTAMPDIFF(month, ${first_order}, CURDATE()) ;;
+  }
 }
