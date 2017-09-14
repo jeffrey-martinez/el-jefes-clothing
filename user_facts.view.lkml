@@ -10,7 +10,7 @@ view: user_facts {
   FROM demo_db.orders AS orders
   LEFT OUTER JOIN demo_db.users AS users ON orders.user_id = users.id
 GROUP BY 1
-  HAVING COUNT(orders.id) > 5
+  HAVING COUNT(orders.id) > 4
  ;;
     persist_for: "24 hours"
     indexes: ["user_id"]
