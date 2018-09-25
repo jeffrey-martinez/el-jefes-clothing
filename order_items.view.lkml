@@ -7,6 +7,13 @@ view: order_items {
     sql: ${TABLE}.id ;;
   }
 
+  dimension: verifications_first_30_days_tier {
+    type: tier
+    tiers: [0, 20000, 100000]
+    sql: ${id} ;;
+    style: integer
+  }
+
   dimension: inventory_item_id {
     type: number
     # hidden: yes
@@ -17,6 +24,11 @@ view: order_items {
     type: number
     # hidden: yes
     sql: ${TABLE}.order_id ;;
+  }
+
+  measure: field_name {
+    type: list
+    list_field: order_id
   }
 
   dimension_group: returned {

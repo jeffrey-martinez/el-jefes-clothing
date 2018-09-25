@@ -1,12 +1,13 @@
 connection: "thelook"
 
 # include all the views
-include: "*.view"
+include: "*.view.lkml"
 
 # include all the dashboards
-include: "*.dashboard"
+# include: "*.dashboard"
 
 explore: events {
+  fields: [ALL_FIELDS*, -events.orders_dimension]
   join: users {
     type: left_outer
     sql_on: ${events.user_id} = ${users.id} ;;
@@ -23,12 +24,17 @@ explore: inventory_items {
 }
 
 explore: order_items {
+  fields: [ALL_FIELDS*]
   join: inventory_items {
     type: left_outer
     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
     relationship: many_to_one
   }
 
+  # join: orders {
+  #   type: left_outer
+  #   sql: LEFT JOIN demo_db.orders AS orders ON ${orders.user_id} = ${order_items.order_id} ;;
+  # }
   join: orders {
     type: left_outer
     sql_on: ${order_items.order_id} = ${orders.id} ;;

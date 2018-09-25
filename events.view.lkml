@@ -7,6 +7,11 @@ view: events {
     sql: ${TABLE}.id ;;
   }
 
+  dimension: orders_dimension {
+    type: string
+    sql: ${orders.id} ;;
+  }
+
   dimension_group: created {
     type: time
     timeframes: [

@@ -7,6 +7,36 @@ view: inventory_items {
     sql: ${TABLE}.id ;;
   }
 
+  filter: date_to_use_filter {
+    label: "DATE TO USE"
+    type: string
+    suggestions: ["REPORTABLE SALES","TRANSACTION EVENT WEEK END"]
+  }
+
+  dimension: pass_through_test  {
+    sql: {% parameter date_to_use_filter %} ;;
+    type: string
+  }
+
+  parameter: period {
+    type: unquoted
+    suggestions: ["1", "2", "3", "4", "5", "6", "7", "10"]
+  }
+
+  dimension: pass_through  {
+    sql: {% parameter period %} ;;
+    type: string
+  }
+
+#   dimension: pass_through_test_if  {
+#     sql: {% if date_to_use_filter._parameter_value == "'REPORTABLE SALES'" %}
+#     "First if"
+#     {% else %}
+#     "Else clause"
+#     {% endif %};;
+#     type: string
+#   }
+
   dimension: cost {
     type: number
     sql: ${TABLE}.cost ;;
